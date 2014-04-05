@@ -1,1 +1,3 @@
-integrate with heroku	
+* integrate with heroku	
+* update doc
+* do challenge!
