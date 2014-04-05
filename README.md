@@ -5,32 +5,28 @@ AppDirect Integration Challenge
 
 ### Running locally
 
-1. Run mvn install to create WAR
-2. Deploy in any JEE 5 Compatible Application Server
-
-To get the code:
--------------------
-Clone the repository:
-
-    $ git clone git://github.com/SpringSource/spring-mvc-showcase.git
-
-If this is your first time using Github, review http://help.github.com to learn the basics.
-
-To run the application:
--------------------	
 From the command line with Maven:
 
-    $ cd spring-mvc-showcase
-    $ mvn tomcat7:run
+    $ cd app-direct-challenge
+    $ mvn package
+    $ java -jar target/dependency/webapp-runner.jar --port 8080 target/*.war
 
 or
 
 In your preferred IDE such as SpringSource Tool Suite (STS) or IDEA:
 
-* Import spring-mvc-showcase as a Maven Project
+* Import app-direct-challenge as a Maven Project
 * Drag-n-drop the project onto the "SpringSource tc Server Developer Edition" or another Servlet 2.5 or > Server to run, such as Tomcat.
 
-Access the deployed web application at: http://localhost:8080/spring-mvc-showcase/
+Access the deployed web application at: http://localhost:8080/app-direct-challenge/
+
+To get the code:
+-------------------
+Clone the repository:
+
+    $ git clone git://github.com/jeanfleblanc/app-direct-challenge.git
+
+If this is your first time using Github, review http://help.github.com to learn the basics.
 
 Other info:
 -------------------
