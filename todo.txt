@@ -1,4 +1,2 @@
-* integrate with heroku	
 * update doc
 * do challenge!
-* add responsive design
