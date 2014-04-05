@@ -2,7 +2,7 @@ package ca.leblanc.appdirect.controller;
 
 import org.junit.Test;
 
-public class IntegrationTest {
+public class IntegrationControllerTest {
 
 	@Test
 	public void testBuy() {}

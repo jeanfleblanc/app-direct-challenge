@@ -15,7 +15,7 @@ public class IntegrationController {
      * <p>Expected HTTP GET and request '/welcome'.</p>
      */
     @RequestMapping(value="/welcome", method=RequestMethod.GET)
-    public String delete() {
+    public String welcome() {
        
         return WELCOME;
     }

@@ -8,17 +8,24 @@
 	<name>AppDirect Integration Challenge</name>
 	<description>AppDirect Integration Challenge</description>
 
+	<properties>
+		<java-version>1.7</java-version>
+		<org.springframework-version>4.0.3.RELEASE</org.springframework-version>
+		<org.springframework.security-version>3.2.0.RELEASE</org.springframework.security-version>
+		<org.slf4j-version>1.7.6</org.slf4j-version>
+	</properties>
+
 	<build>
 		<plugins>
 			<plugin>
-        		<groupId>org.apache.maven.plugins</groupId>
-        		<artifactId>maven-compiler-plugin</artifactId>
-		        <configuration>
-        			<source>1.7</source>
-          			<target>1.7</target>
-        		</configuration>
-      		</plugin>
-    	</plugins>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 
 	<dependencyManagement>
@@ -34,8 +41,8 @@
 	</dependencyManagement>
 
 	<dependencies>
-	
-		<!-- Core Dependencies -->
+
+		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
@@ -45,6 +52,33 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>1.5.1.RELEASE</version>
 		</dependency>
+
+		<!-- Security (used for CSRF protection only) -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${org.springframework.security-version}</version>
+		</dependency>
+
+		<!-- Servlet -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>3.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<!-- Logging -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.6</version>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-jdk14</artifactId>
+			<version>1.7.6</version>
+		</dependency>
 		
 		<!-- Testing Dependencies -->
 		<dependency>
@@ -52,18 +86,18 @@
 			<artifactId>junit</artifactId>
 			<version>4.9</version>
 			<scope>test</scope>
-		</dependency>   		
+		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<version>1.9.5</version>
-			<scope>test</scope>			
-		</dependency>            		
+			<scope>test</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
-		</dependency>           
+		</dependency>
 	</dependencies>
 
 </project>
