@@ -1,4 +1,4 @@
-package ca.leblanc.appdirect.integration;
+package ca.leblanc.appdirect.controller;
 
 import org.junit.Test;
 
