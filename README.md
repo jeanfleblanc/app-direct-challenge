@@ -63,4 +63,4 @@ Check the [Getting Started](http://wiki.github.com/fernandezpablo85/scribe-java/
 
 ## Questions?
 
-Feel free to drop me an email, but there's already a [StackOverflow](http://stackoverflow.com) tag for [scribe](http://stackoverflow.com/questions/tagged/scribe) you should use. I'm subscribed to it so I'll pick the question immediately.
+Feel free to drop me an email.
