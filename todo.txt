@@ -1,4 +1,7 @@
 pom.xml
 	* put version in properties section
-	
+	* setup log
+	* integrate cloud foundry
+	* add jqueryui and jquery
+	* add message bundle.
 	

@@ -26,8 +26,12 @@
 	<mvc:view-controller path="/" view-name="welcome"/>
 
 	<!-- Imports user-defined @Controller beans that process client requests -->
-	<context:component-scan base-package="org.springframework.samples.mvc" />
+	<context:component-scan base-package="ca.leblanc.appdirect.controller" />
 
 	<task:annotation-driven />
+	
+	<beans:bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+ 		<beans:property name="basename" value="locale.message" />
+	</beans:bean>
 
 </beans:beans>
