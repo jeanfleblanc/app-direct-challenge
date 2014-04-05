@@ -14,6 +14,8 @@
 	</head>	
 	<body>
 		<h1 id="welcome"><fmt:message key="label.welcome"/></h1>
+		
+		Please try <a href="https://www.appdirect.com/apps/8197">the free edition</a> or <a href="<c:url value="/login" />">login</a>.
 		<script type="text/javascript" src="<c:url value="/resources/jquery/jquery-2.1.0.min.js" />"></script>
 		<script type="text/javascript">
 			$("#welcome").css({ "color": 'red'});;		
