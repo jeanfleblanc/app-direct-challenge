@@ -13,7 +13,10 @@
 		<meta name="_csrf_header" content="${_csrf.headerName}"/>
 	</head>	
 	<body>
-		<fmt:message key="label.welcome"/>
+		<h1 id="welcome"><fmt:message key="label.welcome"/></h1>
 		<script type="text/javascript" src="<c:url value="/resources/jquery/jquery-2.1.0.min.js" />"></script>
+		<script type="text/javascript">
+			$("#welcome").css({ "color": 'red'});;		
+		</script>
 	</body>
 </html>
