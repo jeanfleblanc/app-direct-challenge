@@ -26,41 +26,13 @@ Clone the repository:
 
     $ git clone git://github.com/jeanfleblanc/app-direct-challenge.git
 
-If this is your first time using Github, review http://help.github.com to learn the basics.
+If this is your first time using Github, review [http://help.github.com](http://help.github.com) to learn the basics.
 
 Other info:
 -------------------
    
-### Building and Deploying
-
-**TODO**
-
-```xml
-
-<!-- repository -->
-<repositories>
-  <repository>
-    <id>scribe-java-mvn-repo</id>
-    <url>https://raw.github.com/fernandezpablo85/scribe-java/mvn-repo/</url>
-    <snapshots>
-      <enabled>true</enabled>
-      <updatePolicy>always</updatePolicy>
-    </snapshots>
-  </repository>
-</repositories>
-
-<!-- dependency -->
-<dependency>
-  <groupId>org.scribe</groupId>
-  <artifactId>scribe</artifactId>
-  <version>1.3.6</version>
-</dependency>
-```
-
-## Getting started in less than 2 minutes
-
-Check the [Getting Started](http://wiki.github.com/fernandezpablo85/scribe-java/getting-started) page and start rocking! Please Read the [FAQ](http://wiki.github.com/fernandezpablo85/scribe-java/faq) before creating an issue :)
+You can access a running instance of this application at [http://ad-leblanc.herokuapp.com](http://ad-leblanc.herokuapp.com)    
 
 ## Questions?
 
-Feel free to drop me an email.
+Feel free to drop me an email!
