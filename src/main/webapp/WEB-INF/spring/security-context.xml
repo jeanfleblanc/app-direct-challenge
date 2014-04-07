@@ -29,6 +29,7 @@
 	-->
     <http pattern="/login*" security="none" />
     <http pattern="/welcome*" security="none" />
+    <http pattern="/event*" security="none" />    
     <http pattern="/resources/*" security="none" />
 
 
