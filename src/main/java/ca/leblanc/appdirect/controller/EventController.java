@@ -29,7 +29,7 @@ public class EventController {
 	public String subscriptionOrder(String eventUrl) throws Exception  {
 		
     	// log everything!
-    	logger.info("Entering method");
+    	logger.info("************** Entering method");
     	 
     	// verify encryption
     	
