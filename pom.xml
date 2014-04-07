@@ -12,7 +12,7 @@
 		<java-version>1.7</java-version>
 		<org.springframework-version>4.0.3.RELEASE</org.springframework-version>
 		<org.springframework.data-version>1.5.1.RELEASE</org.springframework.data-version>
-		<org.springframework.security-version>3.2.0.RELEASE</org.springframework.security-version>
+		<org.springframework.security-version>3.2.3.RELEASE</org.springframework.security-version>
 		<javax.servlet-version>3.0.1</javax.servlet-version>
 		<javax.servlet.jsp-version>2.2</javax.servlet.jsp-version>
 		<javax.servlet.jsp.jstl-version>1.2-rev-1</javax.servlet.jsp.jstl-version>
@@ -89,7 +89,22 @@
 			<artifactId>spring-security-web</artifactId>
 			<version>${org.springframework.security-version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${org.springframework.security-version}</version>
+		</dependency>
+    	<dependency>
+      		<groupId>org.springframework.security</groupId>
+      		<artifactId>spring-security-openid</artifactId>
+      		<version>${org.springframework.security-version}</version>
+	    </dependency>
+		<dependency>
+			<groupId>oauth.signpost</groupId>
+			<artifactId>signpost-core</artifactId>
+			<version>1.2.1.2</version>
+		</dependency>	    
+	    
 		<!-- Servlet -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
