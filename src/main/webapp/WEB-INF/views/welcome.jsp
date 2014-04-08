@@ -17,7 +17,10 @@
 		
 		User Id : <%= request.getRemoteUser() %>
 		
-		Please try <a href="https://www.appdirect.com/apps/8197">the free edition</a> or <a href="<c:url value="/login" />">login</a>.
+		<br />
+		
+		This application allows you to take piano lessons online.
+		
 		<script type="text/javascript" src="<c:url value="/resources/jquery/jquery-2.1.0.min.js" />"></script>
 		<script type="text/javascript">
 			$("#welcome").css({ "color": 'red'});;		
