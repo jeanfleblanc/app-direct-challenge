@@ -33,7 +33,7 @@ public class EventController {
     	// log everything!
     	logger.info("************** Entering method");
     	 
-    	// verify encryption
+    	// TODO: verify encryption
     	
     	// callback
     	OAuthConsumer consumer = new DefaultOAuthConsumer("bijoux-8197", "RHDwlCp4EhN6Mtmm");
@@ -47,7 +47,7 @@ public class EventController {
     	logger.info("About to save!");
 
     	
-    	//save order
+    	// TODO: save order
     	
     	// read xml
     	String type = request.getContentType();
