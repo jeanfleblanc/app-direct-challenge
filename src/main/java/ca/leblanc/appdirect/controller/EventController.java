@@ -79,4 +79,41 @@ For more information about the supported error codes, see the error code documen
     	
     	return result;
     }
+    
+    /**
+     * <p>Buy event.</p>
+     * 
+     * <p>Expected HTTP GET and request '/event/buy'.</p>
+     */
+    @RequestMapping(value="/event/subscriptionCancel", method=RequestMethod.GET)
+	public @ResponseBody Result subscriptionCancel(@RequestParam("eventUrl") String eventUrl) throws Exception  {
+		
+    	// log everything!
+    	logger.info("************** Entering method");
+    	 
+    	// TODO: verify encryption
+    	
+    	// callback
+    	OAuthConsumer consumer = new DefaultOAuthConsumer("bijoux-8197", "RHDwlCp4EhN6Mtmm");
+    	
+    	logger.info("************** opening url:" + eventUrl);
+    	URL url = new URL(eventUrl);
+    	HttpURLConnection request = (HttpURLConnection) url.openConnection();
+    	consumer.sign(request);
+    	request.connect();    	
+
+    	logger.info("About to save!");
+
+    	
+    	// TODO: cancel order
+    	
+    	// read xml
+    	String type = request.getContentType();
+    	
+    	logger.info("Content type is " + type);
+    	
+    	Result result = new Result(true, "Account creation successful", "fake124");
+    
+    	return result;
+    }    
 }
