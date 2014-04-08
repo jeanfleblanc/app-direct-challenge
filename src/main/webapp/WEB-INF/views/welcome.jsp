@@ -21,6 +21,8 @@
 		
 		This application allows you to take piano lessons online.
 		
+		To logout, use <a href="https://www.appdirect.com/applogout?openid=<%= request.getRemoteUser() %>">this URL</a>
+		
 		<script type="text/javascript" src="<c:url value="/resources/jquery/jquery-2.1.0.min.js" />"></script>
 		<script type="text/javascript">
 			$("#welcome").css({ "color": 'red'});;		
