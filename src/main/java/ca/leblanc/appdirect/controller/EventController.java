@@ -112,7 +112,7 @@ For more information about the supported error codes, see the error code documen
     	
     	logger.info("Content type is " + type);
     	
-    	Result result = new Result(true, "Account creation successful", "fake124");
+    	Result result = new Result(true, "Account Cancellation successful", "fake124");
     
     	return result;
     }    
