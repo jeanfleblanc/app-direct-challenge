@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import ca.leblanc.appdirect.domain.EventErrorCode;
-import ca.leblanc.appdirect.domain.EventResult;
+import ca.leblanc.appdirect.domain.Result;
+import ca.leblanc.appdirect.domain.ResultError;
+import ca.leblanc.appdirect.domain.ResultError;
+import ca.leblanc.appdirect.domain.ResultSuccess;
 
 @RestController()
 public class EventController {
@@ -32,9 +34,9 @@ public class EventController {
      * <p>Expected HTTP GET and request '/event/buy'.</p>
      */
     @RequestMapping(value="/event/subscriptionOrder", method=RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
-	public EventResult subscriptionOrder(HttpServletRequest request, @RequestParam("eventUrl") String eventUrl) throws Exception  {
+	public Result subscriptionOrder(HttpServletRequest request, @RequestParam("eventUrl") String eventUrl) throws Exception  {
 		
-    	EventResult result;
+    	Result result;
     	
     	// log everything!
     	logger.info("************** Entering method");
@@ -96,11 +98,11 @@ public class EventController {
 	*/
 	    	//or for errors:http://info.appdirect.com/developers/docs/event_references/api_error_codes/ 
 	    	
-	    	result = new EventResult(true, "Account creation successful", "fake124");
+	    	result = new ResultSuccess(true, ResultSuccess.ACCOUNT_CREATION_SUCCESSFUL, "fake124");
 	    	
        	}
        	else {
-       		result = new EventResult(false, EventErrorCode.UNAUTHORIZED, "");
+       		result = new ResultError(false, ResultError.UNAUTHORIZED, "");
        	}
     	/*
     	 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -121,7 +123,7 @@ For more information about the supported error codes, see the error code documen
      * <p>Expected HTTP GET and request '/event/buy'.</p>
      */
     @RequestMapping(value="/event/subscriptionCancel", method=RequestMethod.GET)
-	public @ResponseBody EventResult subscriptionCancel(@RequestParam("eventUrl") String eventUrl) throws Exception  {
+	public @ResponseBody ResultError subscriptionCancel(@RequestParam("eventUrl") String eventUrl) throws Exception  {
 		
     	// log everything!
     	logger.info("************** Entering method");
@@ -153,7 +155,7 @@ For more information about the supported error codes, see the error code documen
     	
     	logger.info("Content type is " + type);
     	
-    	EventResult result = new EventResult(true, "Account Cancellation successful", "fake124");
+    	ResultError result = new ResultError(true, "Account Cancellation successful", "fake124");
     
     	return result;
     }    
