@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name = "result")
-public class ResultSuccess implements Result {	
+public class SuccessResult implements Result {	
 	
 	public static final String ACCOUNT_CREATION_SUCCESSFUL = "Account creation successful";
 	
@@ -17,9 +17,9 @@ public class ResultSuccess implements Result {
 	/**
 	 * Default constructor.
 	 */
-	public ResultSuccess() { /** Do nothing */ }
+	public SuccessResult() { /** Do nothing */ }
 	
-	public ResultSuccess(boolean success, String message, String accountIdentifier) {
+	public SuccessResult(boolean success, String message, String accountIdentifier) {
 		
 		this.success = success;
 		this.message = message;

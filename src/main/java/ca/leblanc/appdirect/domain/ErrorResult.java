@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlAccessorType(XmlAccessType.PROPERTY)
 @XmlRootElement(name = "result")
-public class ResultError implements Result {	
+public class ErrorResult implements Result {	
 	
 	/*
 	 * This error code is typically used when AppDirect admins try to buy subscriptions for apps they have already purchased directly from the Application Vendor. In this scenario, we'll show users an error message and prompt them to link their accounts.
@@ -60,9 +60,9 @@ public class ResultError implements Result {
 	/**
 	 * Default constructor.
 	 */
-	public ResultError() { /** Do nothing */ }
+	public ErrorResult() { /** Do nothing */ }
 	
-	public ResultError(boolean success, String errorCode, String message) {
+	public ErrorResult(boolean success, String errorCode, String message) {
 		
 		this.success = success;
 		this.errorCode = errorCode;		
