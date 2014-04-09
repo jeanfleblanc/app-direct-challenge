@@ -102,8 +102,8 @@ public class EventController {
             for (String key : authHeaderWrong.keySet()) {
             	
             	if (key != null) {
-            	authHeader.put(key.trim(), authHeaderWrong.get(key));
-            	logger.info( "Auth header ket is: '" + key.trim() + "' and value is " + authHeader.get(key));
+            	authHeader.put(key.trim(), authHeaderWrong.get(key).trim());
+            	logger.info( "Auth header ket is: '" + key.trim() + "' and value is '" + authHeaderWrong.get(key).trim() + "'");
             	}
             		
             }
