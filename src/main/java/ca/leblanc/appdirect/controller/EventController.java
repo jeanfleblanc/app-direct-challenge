@@ -58,7 +58,7 @@ public class EventController {
     	Result result;
     	
     	// log everything!
-    	logger.info("************** Entering method");
+    	logger.info("************** Entering method for request '" + request.getRequestURL().toString() + "?" + request.getQueryString() + "'");
  
        
     	
