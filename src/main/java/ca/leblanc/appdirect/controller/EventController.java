@@ -1,15 +1,27 @@
 package ca.leblanc.appdirect.controller;
 
 import java.net.HttpURLConnection;
+import java.net.URI;
 import java.net.URL;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.miniauth.common.IncomingRequest;
+import org.miniauth.credential.AccessCredential;
+import org.miniauth.exception.InvalidInputException;
 import org.miniauth.exception.ValidationException;
+import org.miniauth.oauth.common.OAuthIncomingRequestBuilder;
+import org.miniauth.oauth.credential.OAuthAccessCredential;
 import org.miniauth.oauth.credential.mapper.OAuthLocalTokenCredentialMapper;
 import org.miniauth.oauth.credential.mapper.OAuthSingleConsumerCredentialMapper;
+import org.miniauth.oauth.service.OAuthRequestVerifier;
+import org.miniauth.oauth.service.OAuthVerifierService;
+import org.miniauth.service.RequestVerifier;
 import org.miniauth.web.oauth.OAuthProviderAuthHandler;
 import org.miniauth.web.oauth.OAuthSingleConsumerURLConnectionAuthHandler;
+import org.miniauth.web.oauth.util.OAuthServletRequestUtil;
+import org.miniauth.web.util.ServletRequestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -62,12 +74,29 @@ public class EventController {
        		oauth_signature="IBlWhOm3PuDwaSdxE/Qu4RKPtVE="
        		*/
        		
+       		AccessCredential accessCredential = new OAuthAccessCredential("bijoux-8197", "RHDwlCp4EhN6Mtmm");
        		
+            String httpMethod = request.getMethod();
+            String requestUrl = null;
+            URI baseURI = null;
+            try {
+                requestUrl = request.getRequestURL().toString();
+                baseURI = new URI(requestUrl);
+            } catch (Exception e) {
+                // ??? This cannot happen.
+                throw new InvalidInputException("Invalid requestUrl = " + requestUrl, e);
+            }
+       		       		
+            Map<String,String> authHeader = OAuthServletRequestUtil.getAuthParams(request);
+            Map<String,String[]> queryParams = ServletRequestUtil.getQueryParams(request);
+            Map<String,String[]> formParams = ServletRequestUtil.getFormParams(request);
+            
+       		IncomingRequest incomingRequest = new OAuthIncomingRequestBuilder().setHttpMethod(httpMethod).setBaseURI(baseURI).setAuthHeader(authHeader).setFormParams(formParams).setQueryParams(queryParams).build();     		
+       		validSignature = OAuthRequestVerifier.getInstance().verify(accessCredential, incomingRequest);       		
        		
-       		
-       		OAuthLocalTokenCredentialMapper mapper = new OAuthLocalTokenCredentialMapper("bijoux-8197", "RHDwlCp4EhN6Mtmm");
-           	OAuthProviderAuthHandler oauthProviderAuthHandler = new OAuthProviderAuthHandler(mapper);       		
-       		validSignature = oauthProviderAuthHandler.verifyRequest(request);
+       		//OAuthLocalTokenCredentialMapper mapper = new OAuthLocalTokenCredentialMapper("bijoux-8197", "RHDwlCp4EhN6Mtmm");
+           	//OAuthProviderAuthHandler oauthProviderAuthHandler = new OAuthProviderAuthHandler(mapper);       		
+       		//validSignature = oauthProviderAuthHandler.verifyRequest(request);
        	} catch (ValidationException e) {
        		logger.error("Cannot validate signature", e);
        		validSignature = false;
@@ -119,7 +148,7 @@ public class EventController {
 	    	
        	}
        	else {
-       		result = new ErrorResult(false, ErrorResult.UNAUTHORIZED, "");
+       		result = new ErrorResult(false, ErrorResult.UNAUTHORIZED, "Cannot validate signature");
        	}
     	/*
     	 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
