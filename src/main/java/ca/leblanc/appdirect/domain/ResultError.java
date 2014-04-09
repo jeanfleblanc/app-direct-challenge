@@ -62,11 +62,11 @@ public class ResultError implements Result {
 	 */
 	public ResultError() { /** Do nothing */ }
 	
-	public ResultError(boolean success, String message, String errorCode) {
+	public ResultError(boolean success, String errorCode, String message) {
 		
 		this.success = success;
+		this.errorCode = errorCode;		
 		this.message = message;
-		this.errorCode = errorCode;
 	}
 	
 	public boolean isSuccess() {
