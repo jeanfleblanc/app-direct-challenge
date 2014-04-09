@@ -104,7 +104,7 @@ public class EventController {
             	if (key != null) {
             	authHeader.put(key.trim(), authHeaderWrong.get(key).trim());
             	
-            	if (key.equals("oauth_signature")) {
+            	if (key.trim().equals("oauth_signature")) {
             		
             		authHeader.put("oauth_signature", "29m8jICSsDYXIbr7dTKW7%2FxP74U%3D");
             	}
