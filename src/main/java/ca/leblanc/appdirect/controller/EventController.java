@@ -76,6 +76,8 @@ public class EventController {
        		
        		AccessCredential accessCredential = new OAuthAccessCredential("bijoux-8197", "RHDwlCp4EhN6Mtmm");
        		
+       		logger.info( "Auth header is " + request.getHeader("Authorization"));
+       		       		
             String httpMethod = request.getMethod();
             String requestUrl = null;
             URI baseURI = null;
@@ -88,6 +90,12 @@ public class EventController {
             }
        		       		
             Map<String,String> authHeader = OAuthServletRequestUtil.getAuthParams(request);
+            
+            for (String key : authHeader.keySet()) {
+            	
+            	logger.info( "Auth header ket is: " + key + " and value is " + authHeader.get(key));	
+            }
+            
             Map<String,String[]> queryParams = ServletRequestUtil.getQueryParams(request);
             Map<String,String[]> formParams = ServletRequestUtil.getFormParams(request);
             
@@ -98,7 +106,7 @@ public class EventController {
            	//OAuthProviderAuthHandler oauthProviderAuthHandler = new OAuthProviderAuthHandler(mapper);       		
        		//validSignature = oauthProviderAuthHandler.verifyRequest(request);
        	} catch (ValidationException e) {
-       		logger.error("Cannot validate signature", e);
+       		logger.error("Cannot validate signature", e.getMessage());
        		validSignature = false;
        	}
        	
