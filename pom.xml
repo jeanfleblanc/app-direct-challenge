@@ -104,6 +104,11 @@
 			<artifactId>signpost-core</artifactId>
 			<version>1.2.1.2</version>
 		</dependency>	    
+		<dependency>
+			<groupId>org.aerysoft.miniauth</groupId>
+			<artifactId>miniauth-web</artifactId>
+			<version>0.9.5</version>
+		</dependency>
 	    
 		<!-- Servlet -->
 		<dependency>
@@ -169,6 +174,11 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>net.wimpi</groupId>
+			<artifactId>telnetd-x</artifactId>
+			<version>2.1.1</version>
 		</dependency>
 	</dependencies>
 </project>
