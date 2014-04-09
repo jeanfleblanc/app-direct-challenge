@@ -63,7 +63,7 @@ public class EventController {
     	// Verify signature       	
 
        	boolean validSignature;
-       	String message;
+       	String message = "";
        	
        	try {
        		
@@ -151,11 +151,11 @@ public class EventController {
 	    	
 	    	// read xml
 	    	String type = conn.getContentType();
-	    	String message = conn.getResponseMessage();
+	    	String content = conn.getResponseMessage();
 	    	
 	    	
 	    	logger.info("Content type is " + type);
-	    	logger.info("Content message is " + message);
+	    	logger.info("Content message is " + content);
 	    	
 	    	// send answer:
 	    	/*
