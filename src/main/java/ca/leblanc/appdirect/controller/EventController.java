@@ -86,6 +86,9 @@ public class EventController {
        		logger.info( "Auth header is " + request.getHeader("Authorization"));
        		       		
             String httpMethod = request.getMethod();
+
+       		logger.info( "http Method is " + httpMethod);
+       		
             String requestUrl = null;
             URI baseURI = null;
             try {
@@ -95,21 +98,14 @@ public class EventController {
                 // ??? This cannot happen.
                 throw new InvalidInputException("Invalid requestUrl = " + requestUrl, e);
             }
-       		       		
-            Map<String,String> authHeaderWrong = OAuthServletRequestUtil.getAuthParams(request);
-            Map<String,String> authHeader = new HashMap<String, String>();
+       		
+            logger.info( "base URI is " + baseURI);
             
-            for (String key : authHeaderWrong.keySet()) {
+            Map<String,String> authHeader = OAuthServletRequestUtil.getAuthParams(request);
+            for (String key : authHeader.keySet()) {
             	
             	if (key != null) {
-            	authHeader.put(key.trim(), authHeaderWrong.get(key).trim());
-            	
-            	if (key.trim().equals("oauth_signature")) {
-            		
-            		authHeader.put("oauth_signature", "29m8jICSsDYXIbr7dTKW7%2FxP74U%3D");
-            	}
-            	
-            	logger.info( "Auth header ket is: '" + key.trim() + "' and value is '" + authHeaderWrong.get(key).trim() + "'");
+            	logger.info( "Auth header ket is: '" + key + "' and value is '" + authHeader.get(key) + "'");
             	}
             		
             }
