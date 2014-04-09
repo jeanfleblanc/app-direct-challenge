@@ -17,7 +17,9 @@ import org.miniauth.oauth.credential.mapper.OAuthLocalTokenCredentialMapper;
 import org.miniauth.oauth.credential.mapper.OAuthSingleConsumerCredentialMapper;
 import org.miniauth.oauth.service.OAuthRequestVerifier;
 import org.miniauth.oauth.service.OAuthVerifierService;
+import org.miniauth.oauth.signature.OAuthSignatureVerifier;
 import org.miniauth.service.RequestVerifier;
+import org.miniauth.signature.SignatureVerifier;
 import org.miniauth.web.oauth.OAuthProviderAuthHandler;
 import org.miniauth.web.oauth.OAuthSingleConsumerURLConnectionAuthHandler;
 import org.miniauth.web.oauth.util.OAuthServletRequestUtil;
@@ -99,8 +101,11 @@ public class EventController {
             Map<String,String[]> queryParams = ServletRequestUtil.getQueryParams(request);
             Map<String,String[]> formParams = ServletRequestUtil.getFormParams(request);
             
-       		IncomingRequest incomingRequest = new OAuthIncomingRequestBuilder().setHttpMethod(httpMethod).setBaseURI(baseURI).setAuthHeader(authHeader).setFormParams(formParams).setQueryParams(queryParams).build();     		
-       		validSignature = OAuthRequestVerifier.getInstance().verify(accessCredential, incomingRequest);       		
+            SignatureVerifier signatureVerifier = new OAuthSignatureVerifier();
+            validSignature = signatureVerifier.verify(authHeader, httpMethod, baseURI, authHeader, formParams, queryParams);
+            
+       		//IncomingRequest incomingRequest = new OAuthIncomingRequestBuilder().setHttpMethod(httpMethod).setBaseURI(baseURI).setAuthHeader(authHeader).setFormParams(formParams).setQueryParams(queryParams).build();     		
+       		//validSignature = OAuthRequestVerifier.getInstance().verify(accessCredential, incomingRequest);       		
        		
        		//OAuthLocalTokenCredentialMapper mapper = new OAuthLocalTokenCredentialMapper("bijoux-8197", "RHDwlCp4EhN6Mtmm");
            	//OAuthProviderAuthHandler oauthProviderAuthHandler = new OAuthProviderAuthHandler(mapper);       		
