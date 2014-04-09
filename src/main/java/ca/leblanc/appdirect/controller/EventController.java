@@ -3,6 +3,7 @@ package ca.leblanc.appdirect.controller;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -95,12 +96,16 @@ public class EventController {
                 throw new InvalidInputException("Invalid requestUrl = " + requestUrl, e);
             }
        		       		
-            Map<String,String> authHeader = OAuthServletRequestUtil.getAuthParams(request);
+            Map<String,String> authHeaderWrong = OAuthServletRequestUtil.getAuthParams(request);
+            Map<String,String> authHeader = new HashMap<String, String>();
             
-            for (String key : authHeader.keySet()) {
+            for (String key : authHeaderWrong.keySet()) {
             	
-            	authHeader.put(key.trim(), authHeader.get(key).trim());
-            	logger.info( "Auth header ket is: '" + key + "' and value is " + authHeader.get(key));	
+            	if (key != null) {
+            	authHeader.put(key.trim(), authHeaderWrong.get(key));
+            	logger.info( "Auth header ket is: '" + key.trim() + "' and value is " + authHeader.get(key));
+            	}
+            		
             }
             
             Map<String,String[]> queryParams = ServletRequestUtil.getQueryParams(request);
