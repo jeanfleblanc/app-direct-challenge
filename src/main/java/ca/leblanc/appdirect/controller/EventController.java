@@ -6,6 +6,7 @@ import java.net.URL;
 import javax.servlet.http.HttpServletRequest;
 
 import org.miniauth.exception.ValidationException;
+import org.miniauth.oauth.credential.mapper.OAuthLocalTokenCredentialMapper;
 import org.miniauth.oauth.credential.mapper.OAuthSingleConsumerCredentialMapper;
 import org.miniauth.web.oauth.OAuthProviderAuthHandler;
 import org.miniauth.web.oauth.OAuthSingleConsumerURLConnectionAuthHandler;
@@ -19,9 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.leblanc.appdirect.domain.Result;
-import ca.leblanc.appdirect.domain.ResultError;
-import ca.leblanc.appdirect.domain.ResultError;
-import ca.leblanc.appdirect.domain.ResultSuccess;
+import ca.leblanc.appdirect.domain.ErrorResult;
+import ca.leblanc.appdirect.domain.ErrorResult;
+import ca.leblanc.appdirect.domain.SuccessResult;
 
 @RestController()
 public class EventController {
@@ -48,7 +49,23 @@ public class EventController {
        	boolean validSignature;
        	
        	try {
-           	OAuthSingleConsumerCredentialMapper mapper = new OAuthSingleConsumerCredentialMapper("bijoux-8197", "RHDwlCp4EhN6Mtmm");
+       		
+       		/**
+       		Host: www.appdirect.com
+       		Content-Type: application/xml
+       		Authorization: OAuth realm="",
+       		oauth_nonce="72250409",
+       		oauth_timestamp="1294966759",
+       		oauth_consumer_key="Dummy",
+       		oauth_signature_method="HMAC-SHA1",
+       		oauth_version="1.0",
+       		oauth_signature="IBlWhOm3PuDwaSdxE/Qu4RKPtVE="
+       		*/
+       		
+       		
+       		
+       		
+       		OAuthLocalTokenCredentialMapper mapper = new OAuthLocalTokenCredentialMapper("bijoux-8197", "RHDwlCp4EhN6Mtmm");
            	OAuthProviderAuthHandler oauthProviderAuthHandler = new OAuthProviderAuthHandler(mapper);       		
        		validSignature = oauthProviderAuthHandler.verifyRequest(request);
        	} catch (ValidationException e) {
@@ -64,7 +81,7 @@ public class EventController {
 	       	OAuthSingleConsumerURLConnectionAuthHandler handler = new OAuthSingleConsumerURLConnectionAuthHandler("bijoux-8197", "RHDwlCp4EhN6Mtmm");
 	       	handler.endorseRequest(conn);
 	       	conn.connect();
-	       	
+	       
 	    	// callback
 	    	
 	    	logger.info("************** opening url:" + eventUrl);
@@ -98,11 +115,11 @@ public class EventController {
 	*/
 	    	//or for errors:http://info.appdirect.com/developers/docs/event_references/api_error_codes/ 
 	    	
-	    	result = new ResultSuccess(true, ResultSuccess.ACCOUNT_CREATION_SUCCESSFUL, "fake124");
+	    	result = new SuccessResult(true, SuccessResult.ACCOUNT_CREATION_SUCCESSFUL, "fake124");
 	    	
        	}
        	else {
-       		result = new ResultError(false, ResultError.UNAUTHORIZED, "");
+       		result = new ErrorResult(false, ErrorResult.UNAUTHORIZED, "");
        	}
     	/*
     	 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -123,7 +140,7 @@ For more information about the supported error codes, see the error code documen
      * <p>Expected HTTP GET and request '/event/buy'.</p>
      */
     @RequestMapping(value="/event/subscriptionCancel", method=RequestMethod.GET)
-	public @ResponseBody ResultError subscriptionCancel(@RequestParam("eventUrl") String eventUrl) throws Exception  {
+	public @ResponseBody ErrorResult subscriptionCancel(@RequestParam("eventUrl") String eventUrl) throws Exception  {
 		
     	// log everything!
     	logger.info("************** Entering method");
@@ -155,7 +172,7 @@ For more information about the supported error codes, see the error code documen
     	
     	logger.info("Content type is " + type);
     	
-    	ResultError result = new ResultError(true, "Account Cancellation successful", "fake124");
+    	ErrorResult result = new ErrorResult(true, "Account Cancellation successful", "fake124");
     
     	return result;
     }    
