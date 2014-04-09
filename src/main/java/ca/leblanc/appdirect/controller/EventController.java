@@ -99,7 +99,7 @@ public class EventController {
             
             for (String key : authHeader.keySet()) {
             	
-            	authHeader.put(key, authHeader.get(key).trim());
+            	authHeader.put(key.trim(), authHeader.get(key).trim());
             	logger.info( "Auth header ket is: '" + key + "' and value is " + authHeader.get(key));	
             }
             
