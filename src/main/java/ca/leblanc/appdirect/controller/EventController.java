@@ -13,6 +13,7 @@ import org.miniauth.exception.InvalidInputException;
 import org.miniauth.exception.ValidationException;
 import org.miniauth.oauth.common.OAuthIncomingRequestBuilder;
 import org.miniauth.oauth.common.OAuthParamMap;
+import org.miniauth.oauth.core.OAuthConstants;
 import org.miniauth.oauth.credential.OAuthAccessCredential;
 import org.miniauth.oauth.credential.mapper.OAuthLocalTokenCredentialMapper;
 import org.miniauth.oauth.credential.mapper.OAuthSingleConsumerCredentialMapper;
@@ -107,6 +108,8 @@ public class EventController {
             SignatureVerifier signatureVerifier = new OAuthSignatureVerifier();
             
             logger.info( "Before validate param");
+            
+            logger.info("*** contains: " + authHeader.containsKey(OAuthConstants.PARAM_OAUTH_SIGNATURE_METHOD));
             
             OAuthParamMap oauthParamMap = OAuthSignatureUtil.validateOAuthParams(authHeader, true);
             
