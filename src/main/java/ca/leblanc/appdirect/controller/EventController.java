@@ -108,7 +108,7 @@ public class EventController {
             
             logger.info( "Before validate param");
             
-            OAuthParamMap oauthParamMap = OAuthSignatureUtil.validateOAuthParams(authHeader, formParams, queryParams);
+            OAuthParamMap oauthParamMap = OAuthSignatureUtil.validateOAuthParams(authHeader, true);
             
             logger.info( "After validate param");	
             
