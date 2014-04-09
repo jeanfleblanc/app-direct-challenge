@@ -12,12 +12,14 @@ import org.miniauth.credential.AccessCredential;
 import org.miniauth.exception.InvalidInputException;
 import org.miniauth.exception.ValidationException;
 import org.miniauth.oauth.common.OAuthIncomingRequestBuilder;
+import org.miniauth.oauth.common.OAuthParamMap;
 import org.miniauth.oauth.credential.OAuthAccessCredential;
 import org.miniauth.oauth.credential.mapper.OAuthLocalTokenCredentialMapper;
 import org.miniauth.oauth.credential.mapper.OAuthSingleConsumerCredentialMapper;
 import org.miniauth.oauth.service.OAuthRequestVerifier;
 import org.miniauth.oauth.service.OAuthVerifierService;
 import org.miniauth.oauth.signature.OAuthSignatureVerifier;
+import org.miniauth.oauth.util.OAuthSignatureUtil;
 import org.miniauth.service.RequestVerifier;
 import org.miniauth.signature.SignatureVerifier;
 import org.miniauth.web.oauth.OAuthProviderAuthHandler;
@@ -61,6 +63,7 @@ public class EventController {
     	// Verify signature       	
 
        	boolean validSignature;
+       	String message;
        	
        	try {
        		
@@ -102,6 +105,13 @@ public class EventController {
             Map<String,String[]> formParams = ServletRequestUtil.getFormParams(request);
             
             SignatureVerifier signatureVerifier = new OAuthSignatureVerifier();
+            
+            logger.info( "Before validate param");
+            
+            OAuthParamMap oauthParamMap = OAuthSignatureUtil.validateOAuthParams(authHeader, formParams, queryParams);
+            
+            logger.info( "After validate param");	
+            
             validSignature = signatureVerifier.verify(authHeader, httpMethod, baseURI, authHeader, formParams, queryParams);
             
        		//IncomingRequest incomingRequest = new OAuthIncomingRequestBuilder().setHttpMethod(httpMethod).setBaseURI(baseURI).setAuthHeader(authHeader).setFormParams(formParams).setQueryParams(queryParams).build();     		
@@ -111,7 +121,8 @@ public class EventController {
            	//OAuthProviderAuthHandler oauthProviderAuthHandler = new OAuthProviderAuthHandler(mapper);       		
        		//validSignature = oauthProviderAuthHandler.verifyRequest(request);
        	} catch (ValidationException e) {
-       		logger.error("Cannot validate signature", e.getMessage());
+       		logger.error("Cannot validate signature", e);
+       		message = e.getMessage();
        		validSignature = false;
        	}
        	
@@ -161,7 +172,7 @@ public class EventController {
 	    	
        	}
        	else {
-       		result = new ErrorResult(false, ErrorResult.UNAUTHORIZED, "Cannot validate signature");
+       		result = new ErrorResult(false, ErrorResult.UNAUTHORIZED, message);
        	}
     	/*
     	 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
