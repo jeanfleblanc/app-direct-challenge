@@ -26,7 +26,6 @@ import org.miniauth.service.RequestVerifier;
 import org.miniauth.signature.SignatureVerifier;
 import org.miniauth.web.oauth.OAuthProviderAuthHandler;
 import org.miniauth.web.oauth.OAuthSingleConsumerURLConnectionAuthHandler;
-import org.miniauth.web.oauth.util.OAuthServletRequestUtil;
 import org.miniauth.web.util.ServletRequestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +40,7 @@ import ca.leblanc.appdirect.domain.Result;
 import ca.leblanc.appdirect.domain.ErrorResult;
 import ca.leblanc.appdirect.domain.ErrorResult;
 import ca.leblanc.appdirect.domain.SuccessResult;
+import ca.leblanc.appdirect.util.OAuthServletRequestUtil;
 
 @RestController()
 public class EventController {
