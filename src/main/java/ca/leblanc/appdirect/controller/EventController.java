@@ -99,7 +99,7 @@ public class EventController {
             
             for (String key : authHeader.keySet()) {
             	
-            	logger.info( "Auth header ket is: " + key + " and value is " + authHeader.get(key));	
+            	logger.info( "Auth header ket is: '" + key + "' and value is " + authHeader.get(key));	
             }
             
             Map<String,String[]> queryParams = ServletRequestUtil.getQueryParams(request);
@@ -108,7 +108,8 @@ public class EventController {
             SignatureVerifier signatureVerifier = new OAuthSignatureVerifier();
             
             logger.info( "Before validate param");
-            
+
+            logger.info("*** contains key '" + OAuthConstants.PARAM_OAUTH_SIGNATURE_METHOD + "' value: " + authHeader.get(OAuthConstants.PARAM_OAUTH_SIGNATURE_METHOD));
             logger.info("*** contains: " + authHeader.containsKey(OAuthConstants.PARAM_OAUTH_SIGNATURE_METHOD));
             
             OAuthParamMap oauthParamMap = OAuthSignatureUtil.validateOAuthParams(authHeader, true);
