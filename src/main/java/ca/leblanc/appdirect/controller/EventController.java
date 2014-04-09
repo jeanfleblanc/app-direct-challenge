@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.leblanc.appdirect.domain.EventErrorCode;
-import ca.leblanc.appdirect.domain.Result;
+import ca.leblanc.appdirect.domain.EventResult;
 
 @RestController()
 public class EventController {
@@ -32,9 +32,9 @@ public class EventController {
      * <p>Expected HTTP GET and request '/event/buy'.</p>
      */
     @RequestMapping(value="/event/subscriptionOrder", method=RequestMethod.GET, produces=MediaType.APPLICATION_XML_VALUE)
-	public Result subscriptionOrder(HttpServletRequest request, @RequestParam("eventUrl") String eventUrl) throws Exception  {
+	public EventResult subscriptionOrder(HttpServletRequest request, @RequestParam("eventUrl") String eventUrl) throws Exception  {
 		
-    	Result result;
+    	EventResult result;
     	
     	// log everything!
     	logger.info("************** Entering method");
@@ -42,15 +42,15 @@ public class EventController {
        
     	
     	// Verify signature       	
-       	OAuthSingleConsumerCredentialMapper mapper = new OAuthSingleConsumerCredentialMapper("bijoux-8197", "RHDwlCp4EhN6Mtmm");
-       	OAuthProviderAuthHandler oauthProviderAuthHandler = new OAuthProviderAuthHandler(mapper);
+
        	boolean validSignature;
        	
        	try {
-       		
+           	OAuthSingleConsumerCredentialMapper mapper = new OAuthSingleConsumerCredentialMapper("bijoux-8197", "RHDwlCp4EhN6Mtmm");
+           	OAuthProviderAuthHandler oauthProviderAuthHandler = new OAuthProviderAuthHandler(mapper);       		
        		validSignature = oauthProviderAuthHandler.verifyRequest(request);
        	} catch (ValidationException e) {
-       			
+       		logger.error("Cannot validate signature", e);
        		validSignature = false;
        	}
        	
@@ -96,11 +96,11 @@ public class EventController {
 	*/
 	    	//or for errors:http://info.appdirect.com/developers/docs/event_references/api_error_codes/ 
 	    	
-	    	result = new Result(true, "Account creation successful", "fake124");
+	    	result = new EventResult(true, "Account creation successful", "fake124");
 	    	
        	}
        	else {
-       		result = new Result(false, EventErrorCode.UNAUTHORIZED, "");
+       		result = new EventResult(false, EventErrorCode.UNAUTHORIZED, "");
        	}
     	/*
     	 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
@@ -121,7 +121,7 @@ For more information about the supported error codes, see the error code documen
      * <p>Expected HTTP GET and request '/event/buy'.</p>
      */
     @RequestMapping(value="/event/subscriptionCancel", method=RequestMethod.GET)
-	public @ResponseBody Result subscriptionCancel(@RequestParam("eventUrl") String eventUrl) throws Exception  {
+	public @ResponseBody EventResult subscriptionCancel(@RequestParam("eventUrl") String eventUrl) throws Exception  {
 		
     	// log everything!
     	logger.info("************** Entering method");
@@ -153,7 +153,7 @@ For more information about the supported error codes, see the error code documen
     	
     	logger.info("Content type is " + type);
     	
-    	Result result = new Result(true, "Account Cancellation successful", "fake124");
+    	EventResult result = new EventResult(true, "Account Cancellation successful", "fake124");
     
     	return result;
     }    
