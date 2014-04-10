@@ -212,17 +212,17 @@ public class AppDirectEventController {
 		oauthSignature.sign(conn);
 		conn.connect();
 
-		logger.info("Add something");
+		logger.info("Addon something");
 
+		// TODO: addon order
+		logger.info("Content message is " + conn.getResponseMessage());		
+		
 		// read response
 		JAXBContext context = JAXBContext.newInstance(Event.class);
 		Event event = (Event) context.createUnmarshaller().unmarshal(new StringReader(conn.getResponseMessage()));
 
 		String accountId = event.getPayload().getAccount().getAccountIdentifier();
 		subscriptionService.updateOrder(accountId, event.getPayload().getOrder());
-
-		// TODO: addon order
-		logger.info("Content message is " + conn.getResponseMessage());
 
 		// send success response
 		return new SuccessResult(true, SuccessResult.ACCOUNT_ADDON_SUCCESSFUL);
