@@ -1,1 +1,3 @@
-* do challenge!
+* Externalize keys
+* Show subscription info for authenticated users
+* Add comments
