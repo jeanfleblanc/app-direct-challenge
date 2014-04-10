@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.leblanc.appdirect.domain.Result;
 import ca.leblanc.appdirect.domain.ErrorResult;
 import ca.leblanc.appdirect.domain.SuccessResult;
+import ca.leblanc.appdirect.service.SubscriptionService;
 import ca.leblanc.appdirect.util.OAuthSignature;
 
 @RestController()
@@ -29,6 +30,9 @@ public class AppDirectEventController {
 	
 	@Autowired
 	private OAuthSignature oauthSignature;
+	
+	@Autowired
+	private SubscriptionService subscriptionService;
 
 	/**
      * <p>Buy event.</p>
@@ -164,6 +168,51 @@ public class AppDirectEventController {
        	
     	return result;
     }    
+    
+    /**
+     * <p>Status event.</p>
+     * 
+     * <p>Expected HTTP GET and request '/event/status'.</p>
+     */
+    @RequestMapping(value="/event/status", method=RequestMethod.GET)
+	public @ResponseBody Result status(HttpServletRequest request, @RequestParam("eventUrl") String eventUrl) throws Exception  {
+    	
+    	Result result;
+  
+       	try {
+
+       		// validate request
+       		oauthSignature.validate(request);       		       	
+	    	
+	    	logger.info("Opening url:" + eventUrl);
+
+	    	// sign and send request
+	    	HttpURLConnection conn = (HttpURLConnection) new URL(eventUrl).openConnection();
+	    	oauthSignature.sign(conn);
+	    	conn.connect();    	
+	
+	    	logger.info("Add something");
+	    	
+	    	// read response
+	    	String type = conn.getContentType();
+	    	String content = conn.getResponseMessage();
+
+	    	// TODO: status	    	
+	    	logger.info("Content type is " + type);
+	    	logger.info("Content message is " + content);
+	    	
+	    	// send success response	    	
+	    	result = new SuccessResult(true, SuccessResult.STATUS_NOTIFICATION_SUCCESSFUL, "fake124");
+	    	
+       	}
+       	catch (OAuthException e) {
+
+	    	// send error response	    	       		
+       		result = new ErrorResult(false, ErrorResult.UNAUTHORIZED, e.getMessage());
+       	}
+       	
+    	return result;
+    }     
     
     /**
      * <p>Add-on event.</p>

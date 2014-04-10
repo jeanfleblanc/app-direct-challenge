@@ -1,4 +1,4 @@
-package ca.leblanc.appdirect.service;
+package ca.leblanc.appdirect.service.impl;
 
 import java.util.HashMap;
 import java.util.List;
@@ -24,7 +24,7 @@ import ca.leblanc.appdirect.domain.CustomUserDetails;
  * @since 3.1
  */
 @Service
-public class CustomUserDetailsService implements UserDetailsService, AuthenticationUserDetailsService<OpenIDAuthenticationToken> {
+public class CustomUserDetailsServiceImpl implements UserDetailsService, AuthenticationUserDetailsService<OpenIDAuthenticationToken> {
 
     private final Map<String, CustomUserDetails> registeredUsers = new HashMap<String, CustomUserDetails>();
 

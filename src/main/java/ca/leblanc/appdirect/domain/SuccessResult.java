@@ -14,6 +14,7 @@ public class SuccessResult implements Result {
 	public static final String ACCOUNT_ADDON_SUCCESSFUL = "Account Addon successfull";
 	public static final String ASSIGN_USER_SUCCESSFUL = "Assign user successfull";
 	public static final String UNASSIGN_USER_SUCCESSFUL = "Unassign user successfull";
+	public static final String STATUS_NOTIFICATION_SUCCESSFUL = "Status Notification Successfull";
 	
 	private boolean success;
 	private String message;
