@@ -1,6 +1,5 @@
 package ca.leblanc.appdirect.controller;
 
-import java.io.StringReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -72,7 +71,7 @@ public class AppDirectEventController {
 
 		// read response
 		JAXBContext context = JAXBContext.newInstance(Event.class);
-		Event event = (Event) context.createUnmarshaller().unmarshal(new StringReader(conn.getResponseMessage()));
+		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		String accountId = subscriptionService.generateAccountId();
 		subscriptionService.saveSubscription(accountId, new Subscription(event.getCreator(), event.getPayload().getOrder()));
@@ -107,7 +106,7 @@ public class AppDirectEventController {
 
 		// read response
 		JAXBContext context = JAXBContext.newInstance(Event.class);
-		Event event = (Event) context.createUnmarshaller().unmarshal(new StringReader(conn.getResponseMessage()));
+		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		String accountId = event.getPayload().getAccount().getAccountIdentifier();
 		subscriptionService.updateOrder(accountId, event.getPayload().getOrder());
@@ -142,7 +141,7 @@ public class AppDirectEventController {
 
 		// read response
 		JAXBContext context = JAXBContext.newInstance(Event.class);
-		Event event = (Event) context.createUnmarshaller().unmarshal(new StringReader(conn.getResponseMessage()));
+		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		String accountId = event.getPayload().getAccount().getAccountIdentifier();
 		subscriptionService.cancelSubscription(accountId);
@@ -173,11 +172,11 @@ public class AppDirectEventController {
 		oauthSignature.sign(conn);
 		conn.connect();
 
-		logger.info("Add something");
+		logger.info("Status");
 
 		// read response
 		JAXBContext context = JAXBContext.newInstance(Event.class);
-		Event event = (Event) context.createUnmarshaller().unmarshal(new StringReader(conn.getResponseMessage()));
+		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		// don't manage upcoming invoice at this point
 		if (!event.getPayload().getNotice().equals(Notice.UPCOMING_INVOICE)) {
@@ -212,14 +211,11 @@ public class AppDirectEventController {
 		oauthSignature.sign(conn);
 		conn.connect();
 
-		logger.info("Addon something");
-
-		// TODO: addon order
-		logger.info("Content message is " + conn.getResponseMessage());		
+		logger.info("Addon something");		
 		
 		// read response
 		JAXBContext context = JAXBContext.newInstance(Event.class);
-		Event event = (Event) context.createUnmarshaller().unmarshal(new StringReader(conn.getResponseMessage()));
+		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		String accountId = event.getPayload().getAccount().getAccountIdentifier();
 		subscriptionService.updateOrder(accountId, event.getPayload().getOrder());
@@ -254,7 +250,7 @@ public class AppDirectEventController {
 
 		// read response
 		JAXBContext context = JAXBContext.newInstance(Event.class);
-		Event event = (Event) context.createUnmarshaller().unmarshal(new StringReader(conn.getResponseMessage()));
+		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		String accountId = event.getPayload().getAccount().getAccountIdentifier();
 		User user = event.getPayload().getUser();
@@ -290,7 +286,7 @@ public class AppDirectEventController {
 
 		// read response
 		JAXBContext context = JAXBContext.newInstance(Event.class);
-		Event event = (Event) context.createUnmarshaller().unmarshal(new StringReader(conn.getResponseMessage()));
+		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		String accountId = event.getPayload().getAccount().getAccountIdentifier();
 		User user = event.getPayload().getUser();
