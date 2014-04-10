@@ -1,11 +1,7 @@
 package ca.leblanc.appdirect.controller;
 
 import java.net.HttpURLConnection;
-import java.net.URI;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 
 import net.oauth.OAuthAccessor;
@@ -14,26 +10,8 @@ import net.oauth.OAuthException;
 import net.oauth.OAuthMessage;
 import net.oauth.SimpleOAuthValidator;
 import net.oauth.server.OAuthServlet;
+import oauth.signpost.basic.DefaultOAuthConsumer;
 
-import org.miniauth.common.IncomingRequest;
-import org.miniauth.credential.AccessCredential;
-import org.miniauth.exception.InvalidInputException;
-import org.miniauth.exception.ValidationException;
-import org.miniauth.oauth.common.OAuthIncomingRequestBuilder;
-import org.miniauth.oauth.common.OAuthParamMap;
-import org.miniauth.oauth.core.OAuthConstants;
-import org.miniauth.oauth.credential.OAuthAccessCredential;
-import org.miniauth.oauth.credential.mapper.OAuthLocalTokenCredentialMapper;
-import org.miniauth.oauth.credential.mapper.OAuthSingleConsumerCredentialMapper;
-import org.miniauth.oauth.service.OAuthRequestVerifier;
-import org.miniauth.oauth.service.OAuthVerifierService;
-import org.miniauth.oauth.signature.OAuthSignatureVerifier;
-import org.miniauth.oauth.util.OAuthSignatureUtil;
-import org.miniauth.service.RequestVerifier;
-import org.miniauth.signature.SignatureVerifier;
-import org.miniauth.web.oauth.OAuthProviderAuthHandler;
-import org.miniauth.web.oauth.OAuthSingleConsumerURLConnectionAuthHandler;
-import org.miniauth.web.util.ServletRequestUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -45,9 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.leblanc.appdirect.domain.Result;
 import ca.leblanc.appdirect.domain.ErrorResult;
-import ca.leblanc.appdirect.domain.ErrorResult;
 import ca.leblanc.appdirect.domain.SuccessResult;
-import ca.leblanc.appdirect.util.OAuthServletRequestUtil;
 
 @RestController()
 public class EventController {
@@ -162,20 +138,20 @@ public class EventController {
        		validator.validateMessage(oauthMessage,accessor);
        		       	
 	       	// Connect to retrieve info
-	       	URL url = new URL(eventUrl);
-	       	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	       	OAuthSingleConsumerURLConnectionAuthHandler handler = new OAuthSingleConsumerURLConnectionAuthHandler("bijoux-8197", "RHDwlCp4EhN6Mtmm");
-	       	handler.endorseRequest(conn);
-	       	conn.connect();
+//	       	URL url = new URL(eventUrl);
+//	       	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//	       	OAuthSingleConsumerURLConnectionAuthHandler handler = new OAuthSingleConsumerURLConnectionAuthHandler("bijoux-8197", "RHDwlCp4EhN6Mtmm");
+//	       	handler.endorseRequest(conn);
+//	       	conn.connect();
 	       
 	    	// callback
 	    	
 	    	logger.info("************** opening url:" + eventUrl);
-	       	//OAuthConsumer consumer = new DefaultOAuthConsumer("bijoux-8197", "RHDwlCp4EhN6Mtmm");        
-	    	//URL url = new URL(eventUrl);
-	    	//HttpURLConnection request = (HttpURLConnection) url.openConnection();
-	    	//consumer.sign(request);
-	    	//request.connect();    	
+	       	oauth.signpost.OAuthConsumer consumer2 = new DefaultOAuthConsumer(consumerKey, consumerSecret);        
+	    	URL url = new URL(eventUrl);
+	    	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+	    	consumer2.sign(conn);
+	    	conn.connect();    	
 	
 	    	logger.info("About to save!");
 	
@@ -234,19 +210,19 @@ For more information about the supported error codes, see the error code documen
     	// TODO: verify encryption
     	
     	// callback
-    	//OAuthConsumer consumer = new DefaultOAuthConsumer("bijoux-8197", "RHDwlCp4EhN6Mtmm");
+    	oauth.signpost.OAuthConsumer consumer = new DefaultOAuthConsumer("bijoux-8197", "RHDwlCp4EhN6Mtmm");
     	
     	logger.info("************** opening url:" + eventUrl);
-    	//URL url = new URL(eventUrl);
-    	//HttpURLConnection request = (HttpURLConnection) url.openConnection();
-    	//consumer.sign(request);
-    	//request.connect();    	
+    	URL url = new URL(eventUrl);
+    	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+    	consumer.sign(conn);
+    	conn.connect();    	
     	
-       	URL url = new URL(eventUrl);
-       	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-       	OAuthSingleConsumerURLConnectionAuthHandler handler = new OAuthSingleConsumerURLConnectionAuthHandler("bijoux-8197", "RHDwlCp4EhN6Mtmm");
-       	handler.endorseRequest(conn);
-       	conn.connect();    	
+//       	URL url = new URL(eventUrl);
+//       	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//       	OAuthSingleConsumerURLConnectionAuthHandler handler = new OAuthSingleConsumerURLConnectionAuthHandler("bijoux-8197", "RHDwlCp4EhN6Mtmm");
+//       	handler.endorseRequest(conn);
+//       	conn.connect();    	
 
     	logger.info("About to save!");
 

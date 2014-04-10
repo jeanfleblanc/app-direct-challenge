@@ -20,6 +20,8 @@
 		<org.slf4j-version>1.7.6</org.slf4j-version>
 		<junit-version>4.9</junit-version>
 		<org.mockito-version>1.9.5</org.mockito-version>
+		<oauth.signpost.signpost-core-version>1.2.1.2</oauth.signpost.signpost-core-version>
+		<net.oauth.core.oauth-provider-version>20100527</net.oauth.core.oauth-provider-version>
 	</properties>
 
 	<build>
@@ -102,23 +104,13 @@
 		<dependency>
 			<groupId>oauth.signpost</groupId>
 			<artifactId>signpost-core</artifactId>
-			<version>1.2.1.2</version>
+			<version>${oauth.signpost.signpost-core-version}</version>
 		</dependency>	    
 		<dependency>
-			<groupId>org.aerysoft.miniauth</groupId>
-			<artifactId>miniauth-web</artifactId>
-			<version>0.9.5</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey.contribs.jersey-oauth</groupId>
-			<artifactId>oauth-signature</artifactId>
-			<version>1.18.1</version>
-		</dependency>
-<dependency>
-	<groupId>net.oauth.core</groupId>
-	<artifactId>oauth-provider</artifactId>
-	<version>20100527</version>
-</dependency>		
+			<groupId>net.oauth.core</groupId>
+			<artifactId>oauth-provider</artifactId>
+			<version>${net.oauth.core.oauth-provider-version}</version>
+		</dependency>		
 	    
 		<!-- Servlet -->
 		<dependency>
