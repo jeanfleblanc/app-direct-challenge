@@ -125,7 +125,7 @@ public class AppDirectEventController {
      * 
      * <p>Expected HTTP GET and request '/event/cancel'.</p>
      */
-    @RequestMapping(value="/event/subscriptionCancel", method=RequestMethod.GET)
+    @RequestMapping(value="/event/cancel", method=RequestMethod.GET)
 	public @ResponseBody Result cancel(HttpServletRequest request, @RequestParam("eventUrl") String eventUrl) throws Exception  {
     	
     	Result result;
@@ -256,11 +256,11 @@ public class AppDirectEventController {
     }    
     
     /**
-     * <p>Add-on event.</p>
+     * <p>Unassign user event.</p>
      * 
-     * <p>Expected HTTP GET and request '/event/unassign'.</p>
+     * <p>Expected HTTP GET and request '/event/unassignUser'.</p>
      */
-    @RequestMapping(value="/event/unassign", method=RequestMethod.GET)
+    @RequestMapping(value="/event/unassignUser", method=RequestMethod.GET)
 	public @ResponseBody Result unassign(HttpServletRequest request, @RequestParam("eventUrl") String eventUrl) throws Exception  {
     	
     	Result result;
