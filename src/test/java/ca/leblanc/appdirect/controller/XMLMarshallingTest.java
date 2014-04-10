@@ -37,6 +37,18 @@ public class XMLMarshallingTest {
 	}
 	
 	@Test
+	public void testAddon() throws Exception {
+		
+		String requestResult = "<event><type>USER_ASSIGNMENT</type><marketplace><partner>ACME</partner><baseUrl>https://www.acme-marketplace.com</baseUrl></marketplace><creator><email>andy.sen@appdirect.com</email><firstName>Andy</firstName><lastName>Sen</lastName><openId>https://www.acme-marketplace.com/openid/id/078e23c3-060f-47b4-b1a3-65c3cb2a283d</openId><language>en</language></creator><payload><account><accountIdentifier>MY_ACCOUNT_IDENTIFIER</accountIdentifier><status>FREE_TRIAL</status></account><user><email>christophe.levesque@appdirect.com</email><firstName>Christophe</firstName><lastName>Levesque</lastName><openId>https://www.acme-marketplace.com/openid/id/4a76c6c4-96e1-42a0-93e0-36af5fa374e8</openId><language>fr</language><attributes><entry><key>favoriteColor</key><value>green</value></entry><entry><key>hourlyRate</key><value>40</value></entry></attributes></user></payload></event>";
+
+		JAXBContext context = JAXBContext.newInstance(Event.class);
+		
+		Event event = (Event)context.createUnmarshaller().unmarshal(new StringReader(requestResult));
+				
+		Assert.assertNotNull(event);	
+	}		
+	
+	@Test
 	public void testAssignUser() throws Exception {
 		
 		String requestResult = "<event><type>USER_ASSIGNMENT</type><marketplace><partner>ACME</partner><baseUrl>https://www.acme-marketplace.com</baseUrl></marketplace><creator><email>andy.sen@appdirect.com</email><firstName>Andy</firstName><lastName>Sen</lastName><openId>https://www.acme-marketplace.com/openid/id/078e23c3-060f-47b4-b1a3-65c3cb2a283d</openId><language>en</language></creator><payload><account><accountIdentifier>MY_ACCOUNT_IDENTIFIER</accountIdentifier><status>FREE_TRIAL</status></account><user><email>christophe.levesque@appdirect.com</email><firstName>Christophe</firstName><lastName>Levesque</lastName><openId>https://www.acme-marketplace.com/openid/id/4a76c6c4-96e1-42a0-93e0-36af5fa374e8</openId><language>fr</language><attributes><entry><key>favoriteColor</key><value>green</value></entry><entry><key>hourlyRate</key><value>40</value></entry></attributes></user></payload></event>";
