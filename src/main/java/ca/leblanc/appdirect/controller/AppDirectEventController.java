@@ -316,7 +316,7 @@ public class AppDirectEventController {
 		return new ErrorResult(false, ErrorResult.ACCOUNT_NOT_FOUND, e.getId());
 	}
 
-	@ExceptionHandler(SubscriptionNotFoundException.class)
+	@ExceptionHandler(UserAlreadyExistException.class)
 	@ResponseStatus(value = HttpStatus.OK)
 	public Result handleExceptions(UserAlreadyExistException e) {
 
