@@ -1,3 +1,4 @@
 * Externalize keys
 * Show subscription info for authenticated users
 * Add comments
+* Show XML payload in log for debugging purposes
