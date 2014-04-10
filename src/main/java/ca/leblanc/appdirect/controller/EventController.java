@@ -2,14 +2,10 @@ package ca.leblanc.appdirect.controller;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+
 import javax.servlet.http.HttpServletRequest;
 
-import net.oauth.OAuthAccessor;
-import net.oauth.OAuthConsumer;
 import net.oauth.OAuthException;
-import net.oauth.OAuthMessage;
-import net.oauth.SimpleOAuthValidator;
-import net.oauth.server.OAuthServlet;
 import oauth.signpost.basic.DefaultOAuthConsumer;
 
 import org.slf4j.Logger;
@@ -24,14 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.leblanc.appdirect.domain.Result;
 import ca.leblanc.appdirect.domain.ErrorResult;
 import ca.leblanc.appdirect.domain.SuccessResult;
+import ca.leblanc.appdirect.util.OAuthSignature;
 
 @RestController()
 public class EventController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 	
-	private String consumerKey = "bijoux-8197";
-	private String consumerSecret = "RHDwlCp4EhN6Mtmm";	
+
 
 	/**
      * <p>Buy event.</p>
@@ -124,19 +120,10 @@ public class EventController {
        	} */
        	
       //Construct the message object. Use null for the URL and let the code construct it.
-       	OAuthMessage oauthMessage=OAuthServlet.getMessage(request,null);
 
-       	//Construct an accessor and a consumer
-       	OAuthConsumer consumer=new OAuthConsumer(null, consumerKey, consumerSecret, null);
-       	OAuthAccessor accessor=new OAuthAccessor(consumer);
-
-       	//Now validate. Weirdly, validator has a void return type. It throws exceptions
-       	//if there are problems.
-       	SimpleOAuthValidator validator=new SimpleOAuthValidator();
-       	
        	try {
-       		validator.validateMessage(oauthMessage,accessor);
-       		       	
+
+           	new OAuthSignature().validate(request);       		       	
 	       	// Connect to retrieve info
 //	       	URL url = new URL(eventUrl);
 //	       	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -147,10 +134,9 @@ public class EventController {
 	    	// callback
 	    	
 	    	logger.info("************** opening url:" + eventUrl);
-	       	oauth.signpost.OAuthConsumer consumer2 = new DefaultOAuthConsumer(consumerKey, consumerSecret);        
-	    	URL url = new URL(eventUrl);
-	    	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-	    	consumer2.sign(conn);
+
+	    	HttpURLConnection conn = (HttpURLConnection) new URL(eventUrl).openConnection();
+	    	new OAuthSignature().sign(conn);
 	    	conn.connect();    	
 	
 	    	logger.info("About to save!");
@@ -195,7 +181,7 @@ For more information about the supported error codes, see the error code documen
     	
     	return result;
     }
-    
+
     /**
      * <p>Cancel event.</p>
      * 
