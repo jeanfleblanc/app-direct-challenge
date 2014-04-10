@@ -14,6 +14,8 @@ import org.springframework.security.openid.OpenIDAttribute;
 import org.springframework.security.openid.OpenIDAuthenticationToken;
 import org.springframework.stereotype.Service;
 
+import ca.leblanc.appdirect.domain.CustomUserDetails;
+
 /**
  * Custom UserDetailsService which accepts any OpenID user, "registering" new users in a map so they can be welcomed
  * back to the site on subsequent logins.

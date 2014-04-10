@@ -1,4 +1,4 @@
-package ca.leblanc.appdirect.service;
+package ca.leblanc.appdirect.domain;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;

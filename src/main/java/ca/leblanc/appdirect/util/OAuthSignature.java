@@ -6,6 +6,8 @@ import java.net.URISyntaxException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.stereotype.Component;
+
 import oauth.signpost.basic.DefaultOAuthConsumer;
 import oauth.signpost.exception.OAuthCommunicationException;
 import oauth.signpost.exception.OAuthExpectationFailedException;
@@ -17,6 +19,7 @@ import net.oauth.OAuthMessage;
 import net.oauth.SimpleOAuthValidator;
 import net.oauth.server.OAuthServlet;
 
+@Component
 public class OAuthSignature {
 	
 	private String consumerKey = "bijoux-8197";

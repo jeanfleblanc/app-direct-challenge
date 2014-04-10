@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller()
-public class LoginController {
+public class MyAppController {
 
-	private static final Logger logger = LoggerFactory.getLogger(EventController.class);	
+	private static final Logger logger = LoggerFactory.getLogger(AppDirectEventController.class);	
 	
     private static final String LOGIN = "login";
     

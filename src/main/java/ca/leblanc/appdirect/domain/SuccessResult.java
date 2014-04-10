@@ -9,6 +9,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SuccessResult implements Result {	
 	
 	public static final String ACCOUNT_CREATION_SUCCESSFUL = "Account creation successful";
+	public static final String ACCOUNT_CHANGE_SUCCESSFUL = "Account change successfull";
+	public static final String ACCOUNT_CANCELLATION_SUCCESSFUL = "Account cancellation successful";
+	public static final String ACCOUNT_ADDON_SUCCESSFUL = "Account Addon successfull";
+	public static final String ASSIGN_USER_SUCCESSFUL = "Assign user successfull";
+	public static final String UNASSIGN_USER_SUCCESSFUL = "Unassign user successfull";
 	
 	private boolean success;
 	private String message;
