@@ -1,4 +1,4 @@
-package ca.leblanc.appdirect.domain;
+package ca.leblanc.appdirect.domain.event;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

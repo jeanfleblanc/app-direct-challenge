@@ -1,4 +1,4 @@
-package ca.leblanc.appdirect.domain;
+package ca.leblanc.appdirect.domain.event;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -24,6 +24,12 @@ public class SuccessResult implements Result {
 	 * Default constructor.
 	 */
 	public SuccessResult() { /** Do nothing */ }
+
+	public SuccessResult(boolean success, String message) {
+		
+		this.success = success;
+		this.message = message;
+	}	
 	
 	public SuccessResult(boolean success, String message, String accountIdentifier) {
 		
