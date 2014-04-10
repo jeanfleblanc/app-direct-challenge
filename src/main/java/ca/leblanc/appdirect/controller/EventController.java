@@ -8,6 +8,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import net.oauth.OAuthAccessor;
+import net.oauth.OAuthConsumer;
+import net.oauth.OAuthException;
+import net.oauth.OAuthMessage;
+import net.oauth.SimpleOAuthValidator;
+import net.oauth.server.OAuthServlet;
+
 import org.miniauth.common.IncomingRequest;
 import org.miniauth.credential.AccessCredential;
 import org.miniauth.exception.InvalidInputException;
@@ -46,6 +53,9 @@ import ca.leblanc.appdirect.util.OAuthServletRequestUtil;
 public class EventController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(EventController.class);
+	
+	private String consumerKey = "bijoux-8197";
+	private String consumerSecret = "RHDwlCp4EhN6Mtmm";	
 
 	/**
      * <p>Buy event.</p>
@@ -66,7 +76,7 @@ public class EventController {
 
        	boolean validSignature;
        	String message = "";
-       	
+       	/*
        	try {
        		
        		/**
@@ -79,7 +89,6 @@ public class EventController {
        		oauth_signature_method="HMAC-SHA1",
        		oauth_version="1.0",
        		oauth_signature="IBlWhOm3PuDwaSdxE/Qu4RKPtVE="
-       		*/
        		
        		AccessCredential accessCredential = new OAuthAccessCredential("bijoux-8197", "RHDwlCp4EhN6Mtmm");
        		
@@ -136,10 +145,22 @@ public class EventController {
        		logger.error("Cannot validate signature", e);
        		message = e.getMessage();
        		validSignature = false;
-       	}
+       	} */
        	
-       	if (validSignature) {
+      //Construct the message object. Use null for the URL and let the code construct it.
+       	OAuthMessage oauthMessage=OAuthServlet.getMessage(request,null);
+
+       	//Construct an accessor and a consumer
+       	OAuthConsumer consumer=new OAuthConsumer(null, consumerKey, consumerSecret, null);
+       	OAuthAccessor accessor=new OAuthAccessor(consumer);
+
+       	//Now validate. Weirdly, validator has a void return type. It throws exceptions
+       	//if there are problems.
+       	SimpleOAuthValidator validator=new SimpleOAuthValidator();
        	
+       	try {
+       		validator.validateMessage(oauthMessage,accessor);
+       		       	
 	       	// Connect to retrieve info
 	       	URL url = new URL(eventUrl);
 	       	HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -183,8 +204,8 @@ public class EventController {
 	    	result = new SuccessResult(true, SuccessResult.ACCOUNT_CREATION_SUCCESSFUL, "fake124");
 	    	
        	}
-       	else {
-       		result = new ErrorResult(false, ErrorResult.UNAUTHORIZED, message);
+       	catch (OAuthException e) {
+       		result = new ErrorResult(false, ErrorResult.UNAUTHORIZED, e.getMessage());
        	}
     	/*
     	 * <?xml version="1.0" encoding="UTF-8" standalone="yes"?>

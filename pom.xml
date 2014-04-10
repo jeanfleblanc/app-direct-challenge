@@ -114,6 +114,11 @@
 			<artifactId>oauth-signature</artifactId>
 			<version>1.18.1</version>
 		</dependency>
+<dependency>
+	<groupId>net.oauth.core</groupId>
+	<artifactId>oauth-provider</artifactId>
+	<version>20100527</version>
+</dependency>		
 	    
 		<!-- Servlet -->
 		<dependency>
