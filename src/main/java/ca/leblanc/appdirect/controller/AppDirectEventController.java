@@ -216,19 +216,7 @@ public class AppDirectEventController {
 		logger.info("Addon something");		
 		
 		// read response
-		JAXBContext context = JAXBContext.newInstance(Event.class);
-		
-		BufferedReader in = new BufferedReader(new InputStreamReader(
-                conn.getInputStream()));
-		String inputLine;
-		while ((inputLine = in.readLine()) != null) 
-			System.out.println(inputLine);
-		in.close();
-
-		conn = (HttpURLConnection) new URL(eventUrl).openConnection();
-		oauthSignature.sign(conn);
-		conn.connect();
-		
+		JAXBContext context = JAXBContext.newInstance(Event.class);		
 		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		String accountId = event.getPayload().getAccount().getAccountIdentifier();
