@@ -19,6 +19,11 @@ import net.oauth.OAuthMessage;
 import net.oauth.SimpleOAuthValidator;
 import net.oauth.server.OAuthServlet;
 
+/**
+ * Utility class that manage Oauth signature and validation 
+ * @author jean_francois
+ *
+ */
 @Component
 public class OAuthSignature {
 	

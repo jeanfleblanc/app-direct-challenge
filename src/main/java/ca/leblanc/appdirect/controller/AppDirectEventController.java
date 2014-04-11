@@ -1,7 +1,5 @@
 package ca.leblanc.appdirect.controller;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -36,6 +34,11 @@ import ca.leblanc.appdirect.domain.exception.UserNotExistException;
 import ca.leblanc.appdirect.service.SubscriptionService;
 import ca.leblanc.appdirect.util.OAuthSignature;
 
+/**
+ * Manage App Direct Events
+ * 
+ * @author jean_francois
+ */
 @RestController()
 public class AppDirectEventController {
 

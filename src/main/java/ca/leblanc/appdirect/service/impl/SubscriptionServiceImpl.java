@@ -16,23 +16,37 @@ import ca.leblanc.appdirect.domain.exception.UserAlreadyExistException;
 import ca.leblanc.appdirect.domain.exception.UserNotExistException;
 import ca.leblanc.appdirect.service.SubscriptionService;
 
+/**
+ * Manage application subscription in an in-memory data structure.
+ * 
+ * @author jean_francois
+ */
 @Service
 public class SubscriptionServiceImpl implements SubscriptionService {
 
     private final Map<String, Subscription> subscriptions = new HashMap<String, Subscription>();
 
+    /** 
+     * {@inheritDoc}
+	 */
 	@Override
 	public String generateAccountId() {
 		
 		return UUID.randomUUID().toString();
 	}
    
+    /** 
+     * {@inheritDoc}
+	 */
 	@Override
     public void saveSubscription(String accountId, Subscription subscription) {
     	
     	subscriptions.put(accountId, subscription);
     }    
     
+    /** 
+     * {@inheritDoc}
+	 */
 	@Override
 	public void updateOrder(String accountId, Order order) throws SubscriptionNotFoundException {
 	
@@ -40,7 +54,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		
 		subscription.setOrder(order);
 	}
-	
+
+    /** 
+     * {@inheritDoc}
+	 */
 	@Override
 	public void updateStatus(String accountId, String status) throws SubscriptionNotFoundException {
 		
@@ -50,6 +67,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		subscription.setStatus(status);
 	}
 
+    /** 
+     * {@inheritDoc}
+	 */
 	@Override
 	public void cancelSubscription(String accountId) throws SubscriptionNotFoundException {
 		
@@ -59,6 +79,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		subscriptions.remove(accountId);
 	}
 
+    /** 
+     * {@inheritDoc}
+	 */
 	@Override
 	public void addUser(String accountId, User user) throws SubscriptionNotFoundException, UserAlreadyExistException {
 		
@@ -83,6 +106,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		}
 	}
 
+    /** 
+     * {@inheritDoc}
+	 */
 	@Override
 	public void removeUser(String accountId, User user)
 			throws SubscriptionNotFoundException, UserNotExistException {
@@ -109,6 +135,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		
 	}
 
+    /** 
+     * {@inheritDoc}
+	 */
 	@Override
     public Subscription loadSubscriptionByAccountId(String accountId) throws SubscriptionNotFoundException {
     	Subscription subscription = subscriptions.get(accountId);
@@ -120,6 +149,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         return subscription;
     }
 
+    /** 
+     * {@inheritDoc}
+	 */
 	@Override
 	public Subscription loadSubscriptionByOpenId(String openId) throws UserNotExistException {
 		

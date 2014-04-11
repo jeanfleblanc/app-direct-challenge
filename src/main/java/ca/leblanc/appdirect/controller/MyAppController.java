@@ -16,6 +16,11 @@ import ca.leblanc.appdirect.domain.Subscription;
 import ca.leblanc.appdirect.domain.exception.UserNotExistException;
 import ca.leblanc.appdirect.service.SubscriptionService;
 
+/**
+ * Application Main Page.
+ * 
+ * @author jean_francois
+ */
 @Controller()
 public class MyAppController {
 
