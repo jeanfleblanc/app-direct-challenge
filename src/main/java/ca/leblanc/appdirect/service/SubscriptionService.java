@@ -9,8 +9,10 @@ import ca.leblanc.appdirect.domain.exception.UserNotExistException;
 
 public interface SubscriptionService {
 
-	Subscription loadSubscriptionByAccountId(String id) throws SubscriptionNotFoundException;
+	Subscription loadSubscriptionByAccountId(String accountId) throws SubscriptionNotFoundException;
 
+	Subscription loadSubscriptionByOpenId(String openId) throws UserNotExistException;
+	
 	String generateAccountId();	
 	
 	void saveSubscription(String accountId, Subscription subscription);

@@ -1,6 +1,7 @@
 package ca.leblanc.appdirect.service.impl;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -118,4 +119,28 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
         return subscription;
     }
+
+	@Override
+	public Subscription loadSubscriptionByOpenId(String openId) throws UserNotExistException {
+		
+		Iterator<Subscription> subscriptionIter = subscriptions.values().iterator();
+		Subscription subscription = null;
+		
+		boolean found = false;
+		
+		while (!found && subscriptionIter.hasNext()) {
+			
+			subscription = subscriptionIter.next();
+			
+			found = subscription.getCreator().getOpenId().equals(openId);
+		}
+		
+		if (found) {
+		
+			return subscription;
+		} else {
+			
+			throw new UserNotExistException(openId);
+		}
+	}
 }
