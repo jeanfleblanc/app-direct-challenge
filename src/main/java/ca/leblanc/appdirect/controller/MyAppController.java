@@ -44,6 +44,7 @@ public class MyAppController {
     		
     		try {
     			
+    			logger.info("OpenId:" + request.getRemoteUser());
     			Subscription subscription = subscriptionService.loadSubscriptionByOpenId(request.getRemoteUser());	
     			request.setAttribute("subscription", subscription);
     			destination = MY_APP;

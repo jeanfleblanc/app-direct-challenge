@@ -76,6 +76,8 @@ public class AppDirectEventController {
 		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		String accountId = subscriptionService.generateAccountId();
+		logger.info("OpenId:" + event.getCreator().getOpenId());
+		logger.info("AccountId:" + accountId);
 		subscriptionService.saveSubscription(accountId, new Subscription(event.getCreator(), event.getPayload().getOrder()));
 
 		// send success response
@@ -146,6 +148,7 @@ public class AppDirectEventController {
 		Event event = (Event) context.createUnmarshaller().unmarshal(conn.getInputStream());
 
 		String accountId = event.getPayload().getAccount().getAccountIdentifier();
+		logger.info("AccountId:" + accountId);
 		subscriptionService.cancelSubscription(accountId);
 
 		// send success response
