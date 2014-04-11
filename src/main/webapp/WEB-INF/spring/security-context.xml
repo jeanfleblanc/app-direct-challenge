@@ -27,8 +27,7 @@
 
 	<b:bean id="requestDataValueProcessor" class="org.springframework.security.web.servlet.support.csrf.CsrfRequestDataValueProcessor"/>	
 	-->
-    <http pattern="/login*" security="none" />
-    <http pattern="/welcome*" security="none" />    
+    <http pattern="/login*" security="none" />  
     <http pattern="/event/*" security="none" />    
     <http pattern="/resources/*" security="none" />
 
