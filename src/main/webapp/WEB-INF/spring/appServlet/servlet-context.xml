@@ -26,7 +26,7 @@
 	</beans:bean>
 
 	<!-- Maps '/' requests to the 'welcome' view -->
-	<mvc:view-controller path="/" view-name="welcome"/>
+	<mvc:view-controller path="/" view-name="index"/>
 
 	<!-- Imports user-defined @Controller beans that process client requests -->
 	<context:component-scan base-package="ca.leblanc.appdirect" />
