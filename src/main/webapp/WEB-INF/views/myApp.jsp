@@ -22,6 +22,6 @@
 				</li>			
 			</ul>
 			
-			<fmt:message key="label.susbscripiton"/> ${equestScope.subscription}
+			<fmt:message key="label.susbscripiton"/> ${requestScope.subscription}
 	</body>
 </html>
